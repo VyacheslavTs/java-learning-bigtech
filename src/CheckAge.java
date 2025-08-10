@@ -32,7 +32,7 @@ public class CheckAge {
     }
 
     //Метод для проверки вводимого значения возраста
-    public static int readPositiveInt(Scanner scanner, String message) {
+    /*    public static int readPositiveInt(Scanner scanner, String message) {
         while (true) {
             System.out.println(message);
             if (scanner.hasNextInt()) {
@@ -43,6 +43,26 @@ public class CheckAge {
                 System.out.println("Вы ввели неверное значение");
                 scanner.next();
             }
+        }
+    }*/
+    //Метод для проверки вводимого значения возраста (УСОВЕРШЕНСТВОВАННЫЙ)
+    public static int readPositiveInt(Scanner scanner, String message) {
+        while (true) {
+            System.out.println(message);
+
+            if (!scanner.hasNextInt()) { //if (!scanner.hasNextInt()) вынесен наверх — теперь мы сразу отсекаем неправильный ввод и не заходим в лишнюю логику.
+                System.out.println("Вы ввели неверное значение");
+                scanner.next(); // очищаем буфер
+                continue; // continue — это даёт понять, что дальше по коду уже нечего проверять в этой итерации.
+            }
+
+            int value = scanner.nextInt();
+
+            if (value > 0) {
+                return value; // Ранний выход через return — как только условие выполнено, мы покидаем метод.
+            }
+
+            System.out.println("Возраст должен быть больше нуля"); //else не нужен, т.к. мы уже через return вышли (ранний выход через return)
         }
     }
 }
