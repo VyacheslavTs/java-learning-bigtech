@@ -30,6 +30,8 @@ public class CheckAge {
         }
        // return "Некорректный возраст"; //Этот ретурн нужен, если вместо последнего else написать else if
     }
+
+    //Метод для проверки вводимого значения возраста
     public static int readPositiveInt(Scanner scanner, String message) {
         while (true) {
             System.out.println(message);
