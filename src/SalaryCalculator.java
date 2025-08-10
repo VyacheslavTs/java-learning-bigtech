@@ -21,7 +21,9 @@ public class SalaryCalculator {
             System.out.println("Введите количество рабочих часов в неделю: ");
             if(scanner.hasNextInt()){
                 hoursPerWeek = scanner.nextInt();// считывает введеное целое число
+                if (hoursPerWeek > 20 && hoursPerWeek<50)
                 break;
+                else System.out.println("Недопустимое количество часов");
             }
             else {
                 System.out.println("Ошибка: введите число.");
@@ -33,7 +35,9 @@ public class SalaryCalculator {
             System.out.println("Введите ставку налога: ");
             if(scanner.hasNextInt()){
                 taxRate = scanner.nextInt();// считывает введеное целое число
-                break;
+                if (taxRate > 0 && taxRate < 100)
+                    break;//break здесь нужен, чтобы выйти из цикла while (true), когда пользователь ввёл корректное значение.
+                    else System.out.println("Ставка налога должна быть от 0 до 100");
             }
             else {
                 System.out.println("Ошибка: введите число.");
