@@ -16,27 +16,31 @@ import java.util.Scanner;
 public class CheckAge {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int age;
-        while (true){
-            System.out.println("Введите свой возраст");
-            if(scanner.hasNextInt()){
-                age = scanner.nextInt();
-                break;
-            } else{
-                System.out.println("Вы ввели неверное значение");
-                scanner.next(); //Без этого программа в цикле выдает надпись "Вы ввели неверное значение"
-            }
-        }
+        int age = readPositiveInt(scanner, "Введите свой возраст");
         System.out.println(checkAge(age));
+        scanner.close();
     }
     public static String checkAge(int age){
-        if (true == age < 18) {
+        if (age < 18) {
             return "Вы несовершеннолетний";
-        } else if (true == age > 18 && age < 59) {
+        } else if (age >= 18 && age <= 59) {
             return "Вы взрослый";
-        } else if (true == age > 60) {
+        } else {
             return "Вы пожилой";
         }
-        return "Дефолтный возраст";
+       // return "Некорректный возраст"; //Этот ретурн нужен, если вместо последнего else написать else if
+    }
+    public static int readPositiveInt(Scanner scanner, String message) {
+        while (true) {
+            System.out.println(message);
+            if (scanner.hasNextInt()) {
+                int value = scanner.nextInt();
+                if (value > 0) return value; //Проверка что вводится возраст больше 0
+                System.out.println("Возраст должен быть больше нуля"); //Почему тут else не нужен — потому что после return value; выполнение метода полностью заканчивается.
+            } else {
+                System.out.println("Вы ввели неверное значение");
+                scanner.next();
+            }
+        }
     }
 }
